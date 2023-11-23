@@ -1,0 +1,22 @@
+{
+  "name": "incognito/mvc",
+  "autoload": {
+    "psr-4": {
+      "Incognito\\Mvc\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "dandevmd",
+      "email": "danmunteanu420@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "app\\": "./"
+    }
+  },
+  "require": {
+    "vlucas/phpdotenv": "^5.6"
+  }
+}
