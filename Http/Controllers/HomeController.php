@@ -2,16 +2,15 @@
 
 namespace app\Http\Controllers;
 
-use app\Core\Controller;
-use app\Core\ViewManager;
+use app\Http\Controllers\SiteController;
 
 
 
-class HomeController
+class HomeController extends SiteController
 {
 
   public function index()
   {
-    return ViewManager::renderView('home');
+    return parent::showView('home');
   }
 }

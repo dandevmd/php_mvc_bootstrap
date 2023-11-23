@@ -5,15 +5,16 @@ namespace app\Http\Controllers\auth;
 use app\Core\Request;
 use app\Core\Validator;
 use app\Core\ViewManager;
+use app\Http\Controllers\SiteController;
 
-class AuthController
+class AuthController extends SiteController
 {
   private string $viewPath = 'auth/';
   private string $layout = 'guest';
 
   public function login()
   {
-    return ViewManager::renderView($this->viewPath . 'login', $this->layout);
+    return parent::showView($this->viewPath . 'login', $this->layout);
   }
 
 
@@ -27,7 +28,7 @@ class AuthController
 
   public function register()
   {
-    return ViewManager::renderView($this->viewPath . 'register', $this->layout);
+    return parent::showView($this->viewPath . 'register', $this->layout);
   }
 
   public function store(Request $request)
@@ -37,7 +38,7 @@ class AuthController
     $errors = Validator::validateRegistrationFields($fields);
 
     if (count($errors) > 0) {
-      return ViewManager::renderView($this->viewPath . 'register', $this->layout, ['errors' => $errors]);
+      return parent::showView($this->viewPath . 'register', $this->layout, ['errors' => $errors]);
     }
 
     if (count($errors) <= 0) {

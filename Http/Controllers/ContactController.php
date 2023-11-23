@@ -3,14 +3,14 @@
 namespace app\Http\Controllers;
 
 use app\Core\Request;
-use app\Core\ViewManager;
+use app\Http\Controllers\SiteController;
 
-class ContactController
+class ContactController extends SiteController
 {
 
   public function index()
   {
-    return ViewManager::renderView('contact');
+    return parent::showView('contact');
   }
 
   public function store(Request $request)
