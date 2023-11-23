@@ -3,11 +3,11 @@
 namespace app\Core;
 
 use app\Core\Request;
-use app\Database\DB;
+use app\Core;
 
 class Application
 {
-  public DB $DB;
+  public Database $DB;
   public Response $response;
   public static string $ROOT_DIR;
   public Router $router;
@@ -20,7 +20,7 @@ class Application
     $this->request = new Request();
     $this->response = new Response();
     $this->router = new Router($this->request, $this->response);
-    $this->DB = new DB();
+    $this->DB = new Database();
   }
 
   public function run()

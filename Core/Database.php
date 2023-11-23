@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Database;
+namespace app\Core;
 
 
 
-class DB extends \PDO
+class Database extends \PDO
 {
   public \PDO $connection;
 
@@ -34,7 +34,7 @@ class DB extends \PDO
 
     $newMigrations = [];
 
-    $files = scandir(__DIR__ . "/Migrations");
+    $files = scandir(dirname(__DIR__) . "/Database/Migrations");
     $toApplyMigrations = array_diff($files, $existingMigrations);
 
 
@@ -42,7 +42,7 @@ class DB extends \PDO
       if ($migration === '.' || $migration === '..')
         continue;
 
-      require_once __DIR__ . "/Migrations/$migration";
+      require_once dirname(__DIR__) . "/Database/Migrations/$migration";
       $className = pathinfo($migration, PATHINFO_FILENAME);
       $classToInstanciate = "app\Database\Migrations\\$className";
       $instance = new $classToInstanciate();

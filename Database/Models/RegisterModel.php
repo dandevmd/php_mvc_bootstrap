@@ -2,6 +2,7 @@
 
 namespace app\Database\Models;
 
+
 class RegisterModel
 {
 
