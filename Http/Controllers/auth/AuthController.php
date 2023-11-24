@@ -3,7 +3,7 @@
 namespace app\Http\Controllers\auth;
 
 use app\Core\Request;
-use app\Core\Validator;
+use app\Core\Validation\Validator\Validators\RegisterValidator;
 use app\Database\Models\User;
 use app\Http\Controllers\SiteController;
 
@@ -34,18 +34,18 @@ class AuthController extends SiteController
   public function store(Request $request)
   {
     $fields = $request->getBody();
-    $errors = Validator::validateRegistrationFields($fields);
+    $errors = RegisterValidator::validateRegisterFields($fields);
 
     if (count($errors) > 0) {
-      return parent::showView($this->viewPath . 'register', $this->layout, ['errors' => $errors]);
+      return parent::showView($this->viewPath . 'register', $this->layout, ['errors' => $errors, 'fields' => $fields]);
     }
 
     $newUser = new User($fields);
 
     if (!$newUser->save()) {
-      return parent::showView($this->viewPath . 'register', $this->layout, ['message' => 'User already exists']);
+      return parent::showView($this->viewPath . 'register', $this->layout, ['message' => 'User already exists', 'fields' => $fields, 'end' => 'bad']);
     }
 
-    return parent::showView($this->viewPath . 'register', $this->layout, ['message' => 'Successfully registered']);
+    return parent::showView($this->viewPath . 'register', $this->layout, ['message' => 'Successfully registered', 'end' => 'good']);
   }
 }

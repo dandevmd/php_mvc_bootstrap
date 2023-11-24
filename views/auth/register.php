@@ -6,13 +6,13 @@
   <div>
     <label for="name">Name </label>
     <input type="text" class="form-control <?= isset($params['errors']['name']) ? ' is-invalid' : '' ?>" id="name"
-      name="name">
+      name="name" value='<?= isset($params['fields']['name']) ? $params['fields']['name'] : '' ?>'>
     <?= isset($params['errors']['name']) ? '<p class="text-danger">' . $params['errors']['name'] . '</p>' : null ?>
   </div>
   <div>
     <label for="email">Email address</label>
     <input type="email" class="form-control <?= isset($params['errors']['email']) ? ' is-invalid' : '' ?>" id="email"
-      name="email">
+      name="email" value='<?= isset($params['fields']['email']) ? $params['fields']['email'] : '' ?>'>
     <?= isset($params['errors']['email']) ? '<p class="text-danger">' . $params['errors']['email'] . '</p>' : null ?>
   </div>
   <div>

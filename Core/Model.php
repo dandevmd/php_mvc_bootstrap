@@ -17,7 +17,7 @@ abstract class Model
 
     $statement = $this->prepare("INSERT INTO $tableName (" . implode(',', array_keys($attributes)) . ") VALUES (" . implode(',', $params) . ")");
 
-    $statement->execute($values);
+    return $statement->execute($values);
   }
 
   public function prepare($sql)
