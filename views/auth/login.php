@@ -1,4 +1,4 @@
-<form action="/login" method="POST" class="container">
+<form action="/attempt" method="POST" class="container">
   <h1 class="text-center text-primary font-weight-bold">Login</h1>
 
   <?php require_once dirname(__DIR__) . '/../partials/alert.php'; ?>
@@ -6,7 +6,8 @@
   <div>
     <label for="email">Email address</label>
     <input type="email" id="email" name="email"
-      class="form-control <?= isset($params['errors']['email']) ? ' is-invalid' : '' ?>">
+      class="form-control <?= isset($params['errors']['email']) ? ' is-invalid' : '' ?>"
+      value="<?= isset($params['fields']['email']) ? $params['fields']['email'] : '' ?>">
     <?= isset($params['errors']['email']) ? '<p class="text-danger">' . $params['errors']['email'] . '</p>' : '' ?>
   </div>
   <div>

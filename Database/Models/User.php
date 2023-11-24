@@ -27,7 +27,7 @@ class User extends Model
       'name' => ucfirst($this->fields['name']),
       'email' => $this->fields['email'],
       'status' => isset($this->fields['status']) ? $this->fields['status'] : 1,
-      'password' => hash('sha256', $this->fields['password']),
+      'password' => password_hash($this->fields['password'], PASSWORD_DEFAULT),
     ];
 
     return $attr;
@@ -35,22 +35,10 @@ class User extends Model
 
   public function save()
   {
-    if ($this->ifExists($this->fields['email'])) {
+    if (parent::findOne(['email' => $this->fields['email']])) {
       return false;
     }
     return parent::save();
-  }
-
-
-  public function ifExists(string $email): bool
-  {
-    $stmt = Application::$app->DB->connection->prepare('SELECT COUNT(*) FROM users WHERE email = :email');
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-
-    $count = $stmt->fetchColumn();
-
-    return $count > 0;
   }
 
 }

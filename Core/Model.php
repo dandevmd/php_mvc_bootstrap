@@ -20,6 +20,22 @@ abstract class Model
     return $statement->execute($values);
   }
 
+  public function findOne($where)
+  {
+
+    $tableName = $this->tableName();
+    $attributes = array_keys($where);
+    $sql = implode("AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
+    $statement = $this->prepare("SELECT * FROM $tableName WHERE $sql");
+    foreach ($where as $key => $item) {
+      $statement->bindValue(":$key", $item);
+    }
+
+    $statement->execute();
+
+    return $statement->fetch();
+  }
+
   public function prepare($sql)
   {
     return Application::$app->DB->connection->prepare($sql);

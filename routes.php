@@ -10,5 +10,8 @@ $router->get("/contact", [ContactController::class, "index"]);
 $router->post("/contact", [ContactController::class, "store"]);
 
 $router->get("/login", [AuthController::class, "login"]);
+$router->post("/attempt", [AuthController::class, "attempt"]);
+$router->get("/logout", [AuthController::class, "logout"]);
+
 $router->get("/register", [AuthController::class, "register"]);
 $router->post("/register", [AuthController::class, "store"]);
