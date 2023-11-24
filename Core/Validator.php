@@ -4,11 +4,11 @@ namespace app\Core;
 
 class Validator
 {
-  public static $errors = [];
 
 
   public static function validateLoginFields(array $fields): array
   {
+    $errors = [];
 
     foreach ($fields as $fieldName => $fieldValue) {
       switch ($fieldName) {
@@ -29,6 +29,7 @@ class Validator
 
   static function validateRegistrationFields(array $fields): array
   {
+    $errors = [];
 
     foreach ($fields as $fieldName => $fieldValue) {
       switch ($fieldName) {

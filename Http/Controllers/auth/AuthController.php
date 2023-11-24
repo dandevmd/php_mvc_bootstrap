@@ -4,7 +4,7 @@ namespace app\Http\Controllers\auth;
 
 use app\Core\Request;
 use app\Core\Validator;
-use app\Core\ViewManager;
+use app\Database\Models\User;
 use app\Http\Controllers\SiteController;
 
 class AuthController extends SiteController
@@ -33,7 +33,6 @@ class AuthController extends SiteController
 
   public function store(Request $request)
   {
-
     $fields = $request->getBody();
     $errors = Validator::validateRegistrationFields($fields);
 
@@ -41,16 +40,12 @@ class AuthController extends SiteController
       return parent::showView($this->viewPath . 'register', $this->layout, ['errors' => $errors]);
     }
 
-    if (count($errors) <= 0) {
-      return 'user created';
+    $newUser = new User($fields);
+
+    if (!$newUser->save()) {
+      return parent::showView($this->viewPath . 'register', $this->layout, ['message' => 'User already exists']);
     }
 
-    // $user = RegisterModel::create($fields);
-
-    // if (!$user) {
-    //   $errors['email'] = 'User already exist';
-    // }
-
-    return ViewManager::renderView($this->viewPath . 'register', $this->layout, ['message' => 'Successfully registered']);
+    return parent::showView($this->viewPath . 'register', $this->layout, ['message' => 'Successfully registered']);
   }
 }

@@ -1,6 +1,8 @@
 <form action="/register" method="POST" class="container">
   <h1 class="text-center text-primary font-weight-bold">Register</h1>
 
+  <?php require_once dirname(__DIR__) . '/../partials/alert.php'; ?>
+
   <div>
     <label for="name">Name </label>
     <input type="text" class="form-control <?= isset($params['errors']['name']) ? ' is-invalid' : '' ?>" id="name"

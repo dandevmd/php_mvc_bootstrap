@@ -1,6 +1,8 @@
 <form action="/login" method="POST" class="container">
   <h1 class="text-center text-primary font-weight-bold">Login</h1>
 
+  <?php require_once dirname(__DIR__) . '/../partials/alert.php'; ?>
+
   <div>
     <label for="email">Email address</label>
     <input type="email" id="email" name="email"

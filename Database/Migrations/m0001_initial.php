@@ -13,9 +13,7 @@ class m0001_initial
     $db = Application::$app->DB;
     $sql = "CREATE TABLE IF NOT EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      first_name VARCHAR(255),
-      last_name VARCHAR(255),
-      username VARCHAR(255) UNIQUE NOT NULL,
+     name VARCHAR(255) ,
       email VARCHAR(255) UNIQUE NOT NULL,
       status TINYINT DEFAULT 0,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -29,9 +27,7 @@ class m0001_initial
     $db = Application::$app->DB;
     $sql = "DROP TABLE IF EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      first_name VARCHAR(255),
-      last_name VARCHAR(255),
-      username VARCHAR(255) UNIQUE NOT NULL,
+     name VARCHAR(255) ,
       email VARCHAR(255) UNIQUE NOT NULL,
       status TINYINT DEFAULT 0,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
