@@ -2,6 +2,8 @@
 
 namespace app\Core;
 
+use app\Core\Middleware\MapMiddleware;
+
 
 class Router
 {
@@ -16,27 +18,39 @@ class Router
     $this->response = $response;
   }
 
-  public function get(string $path, string|callable|array $callback): self
+  public function get(string $path, string|callable|array $callback, array $middlewares = []): self
   {
     $this->routes['GET'][$path] = $callback;
+    $this->routes['GET'][$path]['middlewares'] = $middlewares;
+
     return $this;
   }
 
-  public function post(string $path, string|callable|array $callback): self
+  public function post(string $path, string|callable|array $callback, array $middlewares = []): self
   {
     $this->routes['POST'][$path] = $callback;
+    $this->routes['POST'][$path]['middlewares'] = $middlewares;
+
     return $this;
   }
+
 
   public function resolve()
   {
     $uri = $this->request->getPath();
     $method = $this->request->getMethod();
     $callback = $this->routes[$method][$uri] ?? false;
+    $middlewares = $callback['middlewares'] ?? [];
+
+
 
     if (is_array($callback)) {
       $class = $callback[0];
       $classMethod = $callback[1];
+
+      foreach ($middlewares as $middleware) {
+        (new MapMiddleware)->resolve($middleware, $this->request, $this->response);
+      }
 
       if (class_exists($class)) {
         $controller = new $class();
@@ -63,5 +77,7 @@ class Router
     }
 
   }
+
+
 
 }
