@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6badd34bf13280847f14c06142421702",
+    "content-hash": "65f1a443dbd373812e8b3fe079714d07",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -67,6 +67,39 @@
                 }
             ],
             "time": "2023-11-12T22:16:48+00:00"
+        },
+        {
+            "name": "incognito/core",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dandevmd/mvc-core-without-injec.git",
+                "reference": "0834948aefa901076a4d48fbf6cc0e4a71cc5917"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dandevmd/mvc-core-without-injec/zipball/0834948aefa901076a4d48fbf6cc0e4a71cc5917",
+                "reference": "0834948aefa901076a4d48fbf6cc0e4a71cc5917",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "dandevmd\\mvccore\\": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "dandevmd",
+                    "email": "danmunteanu420@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/dandevmd/mvc-core-without-injec/issues",
+                "source": "https://github.com/dandevmd/mvc-core-without-injec/tree/v1.0.1"
+            },
+            "time": "2023-11-30T07:26:49+00:00"
         },
         {
             "name": "phpoption/phpoption",

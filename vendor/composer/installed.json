@@ -66,6 +66,42 @@
             "install-path": "../graham-campbell/result-type"
         },
         {
+            "name": "incognito/core",
+            "version": "v1.0.1",
+            "version_normalized": "1.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dandevmd/mvc-core-without-injec.git",
+                "reference": "0834948aefa901076a4d48fbf6cc0e4a71cc5917"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dandevmd/mvc-core-without-injec/zipball/0834948aefa901076a4d48fbf6cc0e4a71cc5917",
+                "reference": "0834948aefa901076a4d48fbf6cc0e4a71cc5917",
+                "shasum": ""
+            },
+            "time": "2023-11-30T07:26:49+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "dandevmd\\mvccore\\": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "dandevmd",
+                    "email": "danmunteanu420@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/dandevmd/mvc-core-without-injec/issues",
+                "source": "https://github.com/dandevmd/mvc-core-without-injec/tree/v1.0.1"
+            },
+            "install-path": "../incognito/core"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.9.2",
             "version_normalized": "1.9.2.0",

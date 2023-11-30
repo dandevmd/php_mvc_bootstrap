@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Core\Validation\Rule\Rules;
+namespace dandevmd\mvccore\Validation\Rule\Rules;
 
-use app\Core\Validation\Rule\Rule;
+use dandevmd\mvccore\Validation\Rule\Rule;
 
 class Password extends Rule
 {

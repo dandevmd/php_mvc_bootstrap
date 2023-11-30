@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Core;
+namespace dandevmd\mvccore;
 
-use app\Core\Middleware\MapMiddleware;
+use dandevmd\mvccore\Middleware\MapMiddleware;
 
 
 class Router

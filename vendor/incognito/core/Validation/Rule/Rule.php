@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Core\Validation\Rule;
+namespace dandevmd\mvccore\Validation\Rule;
 
 abstract class Rule
 {

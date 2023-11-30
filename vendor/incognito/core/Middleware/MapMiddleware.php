@@ -1,11 +1,11 @@
 <?php
 
-namespace app\Core\Middleware;
+namespace dandevmd\mvccore\Middleware;
 
-use app\Core\Request;
-use app\Core\Response;
-use app\Core\Middleware\middlewares\AuthMiddleware;
-use app\Core\Middleware\middlewares\GuestMiddleware;
+use dandevmd\mvccore\Request;
+use dandevmd\mvccore\Response;
+use dandevmd\mvccore\Middleware\middlewares\AuthMiddleware;
+use dandevmd\mvccore\Middleware\middlewares\GuestMiddleware;
 
 
 class MapMiddleware

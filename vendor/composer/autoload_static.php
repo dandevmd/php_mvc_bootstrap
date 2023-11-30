@@ -13,6 +13,10 @@ class ComposerStaticInit5d810981ae7e1005a8a1d91519b3a830
     );
 
     public static $prefixLengthsPsr4 = array (
+        'd' => 
+        array (
+            'dandevmd\\mvccore\\' => 17,
+        ),
         'a' => 
         array (
             'app\\' => 4,
@@ -38,6 +42,10 @@ class ComposerStaticInit5d810981ae7e1005a8a1d91519b3a830
     );
 
     public static $prefixDirsPsr4 = array (
+        'dandevmd\\mvccore\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/incognito/core',
+        ),
         'app\\' => 
         array (
             0 => __DIR__ . '/../..' . '/',

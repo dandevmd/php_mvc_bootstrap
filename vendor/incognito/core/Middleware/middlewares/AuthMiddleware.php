@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Core\Middleware\middlewares;
+namespace dandevmd\mvccore\Middleware\middlewares;
 
-use app\Core\Request;
-use app\Core\Middleware\MiddlewareI;
-use app\Core\Response;
+use dandevmd\mvccore\Request;
+use dandevmd\mvccore\Middleware\MiddlewareI;
+use dandevmd\mvccore\Response;
 
 class AuthMiddleware implements MiddlewareI
 {

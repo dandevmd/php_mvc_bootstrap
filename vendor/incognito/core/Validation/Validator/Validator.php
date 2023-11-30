@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Core\Validation\Validator;
+namespace dandevmd\mvccore\Validation\Validator;
 
 class Validator
 {
@@ -8,7 +8,7 @@ class Validator
   {
     $errors = [];
 
-    
+
 
     foreach ($fields as $fieldName => $fieldValue) {
       foreach ($rules[$fieldName] as $rule) {

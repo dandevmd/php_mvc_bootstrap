@@ -1,13 +1,13 @@
 <?php
 
-namespace app\Core\Validation\Validator\Validators;
+namespace dandevmd\mvccore\Validation\Validator\Validators;
 
-use app\Core\Validation\Rule\Rules\Password;
-use app\Core\Validation\Validator\Validator;
-use app\Core\Validation\Rule\Rules\EmailRule;
-use app\Core\Validation\Rule\Rules\RequiredRule;
-use app\Core\Validation\Rule\Rules\MinLengthRule;
-use app\Core\Validation\Rule\Rules\PasswordConfirmation;
+use dandevmd\mvccore\Validation\Rule\Rules\Password;
+use dandevmd\mvccore\Validation\Validator\Validator;
+use dandevmd\mvccore\Validation\Rule\Rules\EmailRule;
+use dandevmd\mvccore\Validation\Rule\Rules\RequiredRule;
+use dandevmd\mvccore\Validation\Rule\Rules\MinLengthRule;
+use dandevmd\mvccore\Validation\Rule\Rules\PasswordConfirmation;
 
 class RegisterValidator extends Validator
 {

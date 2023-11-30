@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Core\Middleware\middlewares;
+namespace dandevmd\mvccore\Middleware\middlewares;
 
-use app\Core\Request;
-use app\Core\Response;
-use app\Core\Middleware\MiddlewareI;
+use dandevmd\mvccore\Request;
+use dandevmd\mvccore\Response;
+use dandevmd\mvccore\Middleware\MiddlewareI;
 
 class GuestMiddleware implements MiddlewareI
 {

@@ -1,7 +1,7 @@
 <?php
-namespace app\Core;
+namespace dandevmd\mvccore;
 
-use app\Core\Application;
+use dandevmd\mvccore\Application;
 
 abstract class Model
 {

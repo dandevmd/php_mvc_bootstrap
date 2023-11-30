@@ -2,9 +2,9 @@
 
 namespace app\Database\Models;
 
-use app\Core\Model;
-use app\Core\Application;
-use app\Core\Response;
+use dandevmd\mvccore\Model;
+use dandevmd\mvccore\Application;
+use dandevmd\mvccore\Response;
 
 
 class Auth extends Model

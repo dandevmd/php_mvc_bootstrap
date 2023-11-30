@@ -2,12 +2,12 @@
 
 namespace app\Http\Controllers\auth;
 
-use app\Core\Request;
+use dandevmd\mvccore\Request;
 use app\Database\Models\Auth;
 use app\Database\Models\User;
 use app\Http\Controllers\SiteController;
-use app\Core\Validation\Validator\Validators\LoginValidator;
-use app\Core\Validation\Validator\Validators\RegisterValidator;
+use dandevmd\mvccore\Validation\Validator\Validators\LoginValidator;
+use dandevmd\mvccore\Validation\Validator\Validators\RegisterValidator;
 
 class AuthController extends SiteController
 {

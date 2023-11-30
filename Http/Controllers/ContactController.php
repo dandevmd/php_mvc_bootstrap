@@ -2,7 +2,7 @@
 
 namespace app\Http\Controllers;
 
-use app\Core\Request;
+use dandevmd\mvccore\Request;
 use app\Http\Controllers\SiteController;
 
 class ContactController extends SiteController

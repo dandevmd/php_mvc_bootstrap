@@ -2,7 +2,7 @@
 
 namespace app\Http\Controllers;
 
-use app\Core\ViewManager;
+use dandevmd\mvccore\ViewManager;
 
 class SiteController
 {

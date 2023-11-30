@@ -2,7 +2,7 @@
 
 namespace app\Database\Migrations;
 
-use app\Core\Application;
+use dandevmd\mvccore\Application;
 
 class m0001_initial
 {

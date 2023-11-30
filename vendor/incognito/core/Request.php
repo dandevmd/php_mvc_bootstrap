@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Core;
+namespace dandevmd\mvccore;
 
 class Request
 {

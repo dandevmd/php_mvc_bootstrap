@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Core;
+namespace dandevmd\mvccore;
 
-use app\Core;
-use app\Core\Session;
-use app\Core\Request;
+use dandevmd\mvccore;
+use dandevmd\mvccore\Session;
+use dandevmd\mvccore\Request;
 
 class Application
 {
