@@ -14,8 +14,8 @@ class Router
 
   public function __construct()
   {
-    $this->request = Application::container()->resolve('app\Core\Request');
-    $this->response = Application::container()->resolve('app\Core\Response');
+    $this->request = Application::resolveContainer('app\Core\Request');
+    $this->response = Application::resolveContainer('app\Core\Response');
   }
 
   public function get(string $path, string|callable|array $callback, array $middlewares = []): self

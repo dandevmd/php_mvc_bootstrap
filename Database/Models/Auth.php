@@ -43,13 +43,13 @@ class Auth extends Model
       return false;
     }
 
-    Application::$container->resolve('app\Core\Session')->set('user', ['id' => $user['id'], 'name' => $user['name']]);
+    Application::resolveContainer('app\Core\Session')->set('user', ['id' => $user['id'], 'name' => $user['name']]);
     return $user;
   }
 
   static function logout()
   {
-    Application::$container->resolve('app\Core\Session')->delete('user');
+    Application::resolveContainer('app\Core\Session')->delete('user');
   }
 
 

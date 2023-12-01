@@ -38,7 +38,7 @@ abstract class Model
 
   public function prepare($sql)
   {
-    return Application::resolve('app\Core\Database')->connection->prepare($sql);
+    return Application::resolveContainer('app\Core\Database')->connection->prepare($sql);
 
   }
 }
