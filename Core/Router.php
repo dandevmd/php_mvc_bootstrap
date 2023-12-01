@@ -54,7 +54,7 @@ class Router
       }
 
       if (class_exists($class)) {
-        $controller = new $class();
+        $controller = Application::resolveContainer($class);
 
         if (method_exists($controller, $classMethod)) {
           return call_user_func_array([$controller, $classMethod], [$this->request, $this->response]);

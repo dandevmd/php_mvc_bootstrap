@@ -22,7 +22,7 @@ class Container
     return $this->getClass($key);
   }
 
-  public function getClass(string $key): callable
+  public function getClass(string $key): callable|string|object
   {
     //Inspect the class that we are trying get from the container
     $reflectionClass = new \ReflectionClass($key);
