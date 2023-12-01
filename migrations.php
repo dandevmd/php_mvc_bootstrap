@@ -9,4 +9,4 @@ $dotenv->load();
 
 $app = new Application(__DIR__);
 
-$app->DB->runMigrations();
+$app::$container->resolve('app\Core\Database')->runMigrations();

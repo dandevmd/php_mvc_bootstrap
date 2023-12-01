@@ -12,10 +12,10 @@ class Router
   public Request $request;
   public Response $response;
 
-  public function __construct(Request $request, Response $response)
+  public function __construct()
   {
-    $this->request = $request;
-    $this->response = $response;
+    $this->request = Application::container()->resolve('app\Core\Request');
+    $this->response = Application::container()->resolve('app\Core\Response');
   }
 
   public function get(string $path, string|callable|array $callback, array $middlewares = []): self
@@ -37,6 +37,7 @@ class Router
 
   public function resolve()
   {
+
     $uri = $this->request->getPath();
     $method = $this->request->getMethod();
     $callback = $this->routes[$method][$uri] ?? false;

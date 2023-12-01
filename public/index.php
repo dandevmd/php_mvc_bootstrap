@@ -11,6 +11,8 @@ require_once __DIR__ . "/../vendor/autoload.php";
 $rootPath = dirname(__DIR__);
 $dotenv = Dotenv\Dotenv::createImmutable($rootPath);
 $dotenv->load();
+require_once(__DIR__ . "/../bootstrap.php");
+
 
 $app = new Application($rootPath);
 $router = $app->router;

@@ -10,7 +10,7 @@ class m0001_initial
 
   public function up()
   {
-    $db = Application::$app->DB;
+    $db = Application::$container->resolve('app\Core\Database');
     $sql = "CREATE TABLE IF NOT EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
      name VARCHAR(255) ,
@@ -24,7 +24,7 @@ class m0001_initial
 
   public function down()
   {
-    $db = Application::$app->DB;
+    $db = Application::$container->resolve('app\Core\Database');
     $sql = "DROP TABLE IF EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
      name VARCHAR(255) ,
