@@ -74,14 +74,6 @@ class Router
         foreach ($attributes as $attribute) {
           $route = $attribute->newInstance();
 
-          $routeAttributes = [
-            'path' => $route->path,
-            'method' => $route->method,
-            'callback' => [$controller, $method->getName()],
-            'middlewares' => $route->middleware ? [$route->middleware] : []
-          ];
-
-
           $this->registerRoutes(
             $route->method->name,
             $route->path,
