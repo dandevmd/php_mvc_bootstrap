@@ -82,7 +82,13 @@ class Router
           ];
 
 
-          $this->registerRoutes($routeAttributes['method']->name, $routeAttributes['path'], $routeAttributes['callback'], $routeAttributes['middlewares']);
+          $this->registerRoutes(
+            $route->method->name,
+            $route->path,
+            [$controller, $method->getName()],
+            $route->middleware ? [$route->middleware] : []
+          );
+
         }
       }
     }
@@ -96,7 +102,7 @@ class Router
       throw new \Exception('Route already exists');
     }
 
-    
+
 
     $this->routes[$method][$path] = $callback;
     $this->routes[$method][$path]['middlewares'] = $middleware;
