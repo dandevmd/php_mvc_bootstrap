@@ -2,13 +2,15 @@
 
 namespace app\Core;
 
+use app\Core\Attributes\Route;
 use app\Core\Middleware\MapMiddleware;
+use ReflectionClass;
 
 
 class Router
 {
 
-  private array $routes = [];
+  public array $routes = [];
   public Request $request;
   public Response $response;
 
@@ -18,31 +20,12 @@ class Router
     $this->response = Application::resolveContainer('app\Core\Response');
   }
 
-  public function get(string $path, string|callable|array $callback, array $middlewares = []): self
-  {
-    $this->routes['GET'][$path] = $callback;
-    $this->routes['GET'][$path]['middlewares'] = $middlewares;
-
-    return $this;
-  }
-
-  public function post(string $path, string|callable|array $callback, array $middlewares = []): self
-  {
-    $this->routes['POST'][$path] = $callback;
-    $this->routes['POST'][$path]['middlewares'] = $middlewares;
-
-    return $this;
-  }
-
-
   public function resolve()
   {
-
     $uri = $this->request->getPath();
     $method = $this->request->getMethod();
     $callback = $this->routes[$method][$uri] ?? false;
     $middlewares = $callback['middlewares'] ?? [];
-
 
 
     if (is_array($callback)) {
@@ -80,5 +63,44 @@ class Router
   }
 
 
+  public function collectRoutes(array $controllersArray)
+  {
+    foreach ($controllersArray as $controller) {
+      $class = new ReflectionClass($controller);
 
+      foreach ($class->getMethods() as $method) {
+        $attributes = $method->getAttributes(Route::class);
+
+        foreach ($attributes as $attribute) {
+          $route = $attribute->newInstance();
+
+          $routeAttributes = [
+            'path' => $route->path,
+            'method' => $route->method,
+            'callback' => [$controller, $method->getName()],
+            'middlewares' => $route->middleware ? [$route->middleware] : []
+          ];
+
+
+          $this->registerRoutes($routeAttributes['method']->name, $routeAttributes['path'], $routeAttributes['callback'], $routeAttributes['middlewares']);
+        }
+      }
+    }
+
+  }
+
+
+  public function registerRoutes(string $method, string $path, string|callable|array $callback, ?array $middleware)
+  {
+    if (isset($this->routes[$method][$path])) {
+      throw new \Exception('Route already exists');
+    }
+
+    
+
+    $this->routes[$method][$path] = $callback;
+    $this->routes[$method][$path]['middlewares'] = $middleware;
+
+    return $this;
+  }
 }

@@ -6,6 +6,9 @@ error_reporting(E_ALL);
 
 
 use app\Core\Application;
+use app\Http\Controllers\HomeController;
+use app\Http\Controllers\ContactController;
+use app\Http\Controllers\auth\AuthController;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 $rootPath = dirname(__DIR__);
@@ -16,7 +19,13 @@ require_once(__DIR__ . "/../bootstrap.php");
 
 $app = new Application($rootPath);
 $router = $app->router;
-$routes = require_once __DIR__ . "/../routes.php";
+
+$router->collectRoutes([
+  HomeController::class,
+  ContactController::class,
+  AuthController::class
+]);
+
 
 
 $app->run();
