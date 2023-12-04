@@ -3,6 +3,8 @@
 namespace app\Http\Controllers\auth;
 
 use app\Core\Request;
+use app\Core\Attributes\GET;
+use app\Core\Attributes\POST;
 use app\Core\Enum\HttpMethod;
 use app\Database\Models\Auth;
 use app\Database\Models\User;
@@ -16,13 +18,13 @@ class AuthController extends SiteController
   private string $viewPath = 'auth/';
   private string $layout = 'guest';
 
-  #[Route('/login', HttpMethod::GET, 'guest')]
+  #[GET('/login', 'guest')]
   public function login()
   {
     return parent::showView($this->viewPath . 'login', $this->layout);
   }
 
-  #[Route('/attempt', HttpMethod::POST, 'guest')]
+  #[POST('/attempt', 'guest')]
   public function attempt(Request $request)
   {
     $fields = $request->getBody();
@@ -41,7 +43,7 @@ class AuthController extends SiteController
     return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Successfully logged in', 'end' => 'good']);
   }
 
-  #[Route('/logout', HttpMethod::GET, 'auth')]
+  #[GET('/logout', 'auth')]
   public function logout()
   {
 
@@ -49,13 +51,13 @@ class AuthController extends SiteController
     return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Successfully logged out', 'end' => 'good']);
   }
 
-  #[Route('/register', HttpMethod::GET, 'guest')]
+  #[GET('/register', 'guest')]
   public function register()
   {
     return parent::showView($this->viewPath . 'register', $this->layout);
   }
 
-  #[Route('/register', HttpMethod::POST, 'guest')]
+  #[POST('/register', 'guest')]
   public function store(Request $request)
   {
     $fields = $request->getBody();

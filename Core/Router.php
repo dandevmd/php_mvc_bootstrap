@@ -5,7 +5,7 @@ namespace app\Core;
 use app\Core\Attributes\Route;
 use app\Core\Middleware\MapMiddleware;
 use ReflectionClass;
-
+use ReflectionAttribute;
 
 class Router
 {
@@ -26,6 +26,8 @@ class Router
     $method = $this->request->getMethod();
     $callback = $this->routes[$method][$uri] ?? false;
     $middlewares = $callback['middlewares'] ?? [];
+
+
 
 
     if (is_array($callback)) {
@@ -68,14 +70,17 @@ class Router
     foreach ($controllersArray as $controller) {
       $class = new ReflectionClass($controller);
 
+
       foreach ($class->getMethods() as $method) {
-        $attributes = $method->getAttributes(Route::class);
+        $attributes = $method->getAttributes(Route::class, ReflectionAttribute::IS_INSTANCEOF);
+
 
         foreach ($attributes as $attribute) {
           $route = $attribute->newInstance();
 
+
           $this->registerRoutes(
-            $route->method->name,
+            $route->method,
             $route->path,
             [$controller, $method->getName()],
             $route->middleware ? [$route->middleware] : []
@@ -93,8 +98,6 @@ class Router
     if (isset($this->routes[$method][$path])) {
       throw new \Exception('Route already exists');
     }
-
-
 
     $this->routes[$method][$path] = $callback;
     $this->routes[$method][$path]['middlewares'] = $middleware;

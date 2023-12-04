@@ -2,6 +2,7 @@
 
 namespace app\Http\Controllers;
 
+use app\Core\Attributes\GET;
 use app\Core\Attributes\Route;
 use app\Core\Enum\HttpMethod;
 use app\Http\Controllers\SiteController;
@@ -10,7 +11,7 @@ use app\Http\Controllers\SiteController;
 
 class HomeController extends SiteController
 {
-  #[Route('/', HttpMethod::GET)]
+  #[GET('/', )]
   public function index()
   {
     return parent::showView('home');
