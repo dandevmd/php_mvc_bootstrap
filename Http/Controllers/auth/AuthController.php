@@ -3,13 +3,18 @@
 namespace app\Http\Controllers\auth;
 
 use app\Core\Request;
+use app\Core\AppMailer;
 use app\Core\Attributes\GET;
 use app\Core\Attributes\POST;
 use app\Core\Enum\HttpMethod;
 use app\Database\Models\Auth;
 use app\Database\Models\User;
 use app\Core\Attributes\Route;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
 use app\Http\Controllers\SiteController;
+use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 use app\Core\Validation\Validator\Validators\LoginValidator;
 use app\Core\Validation\Validator\Validators\RegisterValidator;
 
@@ -39,6 +44,24 @@ class AuthController extends SiteController
     if (!$authUser->auth()) {
       return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Invalid credentials', 'fields' => $fields, 'end' => 'bad']);
     }
+
+    $text = <<<BODY
+    Welcome, we are glad to see you again!
+    BODY;
+
+    (new AppMailer('Welcome back!', $text, $authUser->fields['email']))->sendEmail();
+    // $message = (new Email())->subject('Welcome back!')
+    //   ->from('lCqzQ@example.com')
+    //   ->to($authUser->fields['email'])
+    //   ->text($text);
+
+    // $transport = Transport::fromDsn('smtp://localhost:1025');
+
+    // $mailer = new Mailer($transport);
+
+    // $mailer->send($message);
+
+
 
     return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Successfully logged in', 'end' => 'good']);
   }
