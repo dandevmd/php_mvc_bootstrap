@@ -3,18 +3,11 @@
 namespace app\Http\Controllers\auth;
 
 use app\Core\Request;
-use app\Core\AppMailer;
+use app\Core\Application;
 use app\Core\Attributes\GET;
 use app\Core\Attributes\POST;
-use app\Core\Enum\HttpMethod;
-use app\Database\Models\Auth;
 use app\Database\Models\User;
-use app\Core\Attributes\Route;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\Transport;
 use app\Http\Controllers\SiteController;
-use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 use app\Core\Validation\Validator\Validators\LoginValidator;
 use app\Core\Validation\Validator\Validators\RegisterValidator;
 
@@ -39,30 +32,14 @@ class AuthController extends SiteController
       return parent::showView($this->viewPath . 'login', $this->layout, ['errors' => $errors, 'fields' => $fields]);
     }
 
-    $authUser = new Auth($fields);
+    $user = (new User)->where('email', $fields['email'])->first();
 
-    if (!$authUser->auth()) {
+
+    if (!$user || $user->email !== $fields['email'] || !password_verify($fields['password'], $user->password)) {
       return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Invalid credentials', 'fields' => $fields, 'end' => 'bad']);
     }
 
-    $text = <<<BODY
-    Welcome, we are glad to see you again!
-    BODY;
-
-    (new AppMailer('Welcome back!', $text, $authUser->fields['email']))->sendEmail();
-    // $message = (new Email())->subject('Welcome back!')
-    //   ->from('lCqzQ@example.com')
-    //   ->to($authUser->fields['email'])
-    //   ->text($text);
-
-    // $transport = Transport::fromDsn('smtp://localhost:1025');
-
-    // $mailer = new Mailer($transport);
-
-    // $mailer->send($message);
-
-
-
+    Application::resolveContainer('app\Core\Session')->set('user', ['id' => $user['id'], 'name' => $user['name']]);
     return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Successfully logged in', 'end' => 'good']);
   }
 
@@ -70,7 +47,7 @@ class AuthController extends SiteController
   public function logout()
   {
 
-    Auth::logout();
+    Application::resolveContainer('app\Core\Session')->delete('user');
     return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Successfully logged out', 'end' => 'good']);
   }
 
@@ -90,9 +67,18 @@ class AuthController extends SiteController
       return parent::showView($this->viewPath . 'register', $this->layout, ['errors' => $errors, 'fields' => $fields]);
     }
 
-    $newUser = new User($fields);
+    $user = new User;
+    if ($user->where('email', $fields['email'])->first()) {
+      return parent::showView($this->viewPath . 'register', $this->layout, ['message' => 'User already exists', 'fields' => $fields, 'end' => 'bad']);
+    }
 
-    if (!$newUser->save()) {
+    unset($fields['password_confirmation']);
+    $fields['password'] = password_hash($fields['password'], PASSWORD_DEFAULT);
+
+    $user->fill($fields);
+
+
+    if (!$user->save()) {
       return parent::showView($this->viewPath . 'register', $this->layout, ['message' => 'User already exists', 'fields' => $fields, 'end' => 'bad']);
     }
 

@@ -5,11 +5,6 @@ use app\Core\Container;
 
 $container = new Container();
 
-$container->register('app\Core\Database', function () {
-  return new \app\Core\Database();
-});
-
-Application::setContainer($container);
 
 
 $container->register('app\Core\Request', function () {
