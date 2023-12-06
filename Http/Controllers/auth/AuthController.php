@@ -4,9 +4,10 @@ namespace app\Http\Controllers\auth;
 
 use app\Core\Request;
 use app\Core\Application;
-use app\Core\Attributes\GET;
-use app\Core\Attributes\POST;
+
+use app\Core\Enum\HttpMethod;
 use app\Database\Models\User;
+use app\Core\Attributes\Route;
 use app\Http\Controllers\SiteController;
 use app\Core\Validation\Validator\Validators\LoginValidator;
 use app\Core\Validation\Validator\Validators\RegisterValidator;
@@ -16,13 +17,13 @@ class AuthController extends SiteController
   private string $viewPath = 'auth/';
   private string $layout = 'guest';
 
-  #[GET('/login', 'guest')]
+  #[Route('/login', HttpMethod::GET, 'guest')]
   public function login()
   {
     return parent::showView($this->viewPath . 'login', $this->layout);
   }
 
-  #[POST('/attempt', 'guest')]
+  #[Route('/attempt', HttpMethod::POST, 'guest')]
   public function attempt(Request $request)
   {
     $fields = $request->getBody();
@@ -43,7 +44,7 @@ class AuthController extends SiteController
     return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Successfully logged in', 'end' => 'good']);
   }
 
-  #[GET('/logout', 'auth')]
+  #[Route('/logout', HttpMethod::GET, 'auth')]
   public function logout()
   {
 
@@ -51,13 +52,13 @@ class AuthController extends SiteController
     return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Successfully logged out', 'end' => 'good']);
   }
 
-  #[GET('/register', 'guest')]
+  #[Route('/register', HttpMethod::GET, 'guest')]
   public function register()
   {
     return parent::showView($this->viewPath . 'register', $this->layout);
   }
 
-  #[POST('/register', 'guest')]
+  #[Route('/register', HttpMethod::POST, 'guest')]
   public function store(Request $request)
   {
     $fields = $request->getBody();

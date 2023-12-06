@@ -4,13 +4,19 @@ namespace app\Core\Attributes;
 
 use Attribute;
 use app\Core\Enum\HttpMethod;
-use app\Core\Attributes\IRoute;
 
 #[Attribute]
-class Route implements IRoute
+class Route
 {
-  public function __construct(public string $path, public string $method, public ?array $middleware = [])
-  {
+  public string $path;
+  public HttpMethod $method;
+  public ?string $middleware;
 
+  public function __construct(string $path, HttpMethod $method, ?string $middleware = null)
+  {
+    $this->path = $path;
+    $this->method = $method;
+    $this->middleware = $middleware;
   }
+
 }

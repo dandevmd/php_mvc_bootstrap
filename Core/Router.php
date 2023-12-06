@@ -78,14 +78,15 @@ class Router
         foreach ($attributes as $attribute) {
           $route = $attribute->newInstance();
 
+          $routeAttributes = [
+            'path' => $route->path,
+            'method' => $route->method,
+            'callback' => [$controller, $method->getName()],
+            'middlewares' => $route->middleware ? [$route->middleware] : []
+          ];
 
-          $this->registerRoutes(
-            $route->method,
-            $route->path,
-            [$controller, $method->getName()],
-            $route->middleware ? [$route->middleware] : []
-          );
 
+          $this->registerRoutes($routeAttributes['method']->name, $routeAttributes['path'], $routeAttributes['callback'], $routeAttributes['middlewares']);
         }
       }
     }
@@ -95,10 +96,6 @@ class Router
 
   public function registerRoutes(string $method, string $path, string|callable|array $callback, ?array $middleware)
   {
-    if (isset($this->routes[$method][$path])) {
-      throw new \Exception('Route already exists');
-    }
-
     $this->routes[$method][$path] = $callback;
     $this->routes[$method][$path]['middlewares'] = $middleware;
 
