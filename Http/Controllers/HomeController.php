@@ -11,7 +11,7 @@ use app\Http\Controllers\SiteController;
 
 class HomeController extends SiteController
 {
-  #[GET('/', )]
+  #[Route('/', HttpMethod::GET)]
   public function index()
   {
     return parent::showView('home');

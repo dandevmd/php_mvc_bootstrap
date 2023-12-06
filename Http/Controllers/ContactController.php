@@ -12,13 +12,13 @@ use app\Http\Controllers\SiteController;
 class ContactController extends SiteController
 {
 
-  #[GET('/contact', 'auth')]
+  #[Route('/contact', HttpMethod::GET, 'auth')]
   public function index()
   {
     return parent::showView('contact');
   }
 
-  #[POST('/contact', 'auth')]
+  #[Route('/contact', HttpMethod::POST, 'auth')]
   public function store(Request $request)
   {
     $request->getBody();

@@ -2,19 +2,15 @@
 
 namespace app\Http\Controllers\auth;
 
+use app\Core\Enum\HttpMethod;
 use app\Core\Request;
-use app\Core\AppMailer;
 use app\Core\Attributes\GET;
 use app\Core\Attributes\POST;
-use app\Core\Enum\HttpMethod;
 use app\Database\Models\Auth;
 use app\Database\Models\User;
 use app\Core\Attributes\Route;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\Transport;
+
 use app\Http\Controllers\SiteController;
-use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 use app\Core\Validation\Validator\Validators\LoginValidator;
 use app\Core\Validation\Validator\Validators\RegisterValidator;
 
@@ -23,13 +19,13 @@ class AuthController extends SiteController
   private string $viewPath = 'auth/';
   private string $layout = 'guest';
 
-  #[GET('/login', 'guest')]
+  #[Route('/login', HttpMethod::GET, 'guest')]
   public function login()
   {
     return parent::showView($this->viewPath . 'login', $this->layout);
   }
 
-  #[POST('/attempt', 'guest')]
+  #[Route('/attempt', HttpMethod::POST, 'guest')]
   public function attempt(Request $request)
   {
     $fields = $request->getBody();
@@ -45,11 +41,11 @@ class AuthController extends SiteController
       return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Invalid credentials', 'fields' => $fields, 'end' => 'bad']);
     }
 
-    $text = <<<BODY
-    Welcome, we are glad to see you again!
-    BODY;
+    // $text = <<<BODY
+    // Welcome, we are glad to see you again!
+    // BODY;
 
-    (new AppMailer('Welcome back!', $text, $authUser->fields['email']))->sendEmail();
+    // (new AppMailer('Welcome back!', $text, $authUser->fields['email']))->sendEmail();
     // $message = (new Email())->subject('Welcome back!')
     //   ->from('lCqzQ@example.com')
     //   ->to($authUser->fields['email'])
@@ -66,7 +62,7 @@ class AuthController extends SiteController
     return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Successfully logged in', 'end' => 'good']);
   }
 
-  #[GET('/logout', 'auth')]
+  #[Route('/logout', HttpMethod::GET, 'auth')]
   public function logout()
   {
 
@@ -74,13 +70,13 @@ class AuthController extends SiteController
     return parent::showView($this->viewPath . 'login', $this->layout, ['message' => 'Successfully logged out', 'end' => 'good']);
   }
 
-  #[GET('/register', 'guest')]
+  #[Route('/register', HttpMethod::GET, 'guest')]
   public function register()
   {
     return parent::showView($this->viewPath . 'register', $this->layout);
   }
 
-  #[POST('/register', 'guest')]
+  #[Route('/register', HttpMethod::POST, 'guest')]
   public function store(Request $request)
   {
     $fields = $request->getBody();
